@@ -42,10 +42,13 @@ Activity(name="Party" , category="SOCIAL", code="PARTY", duration=1, description
 def get_date():
     return datetime.datetime.date(datetime.datetime.now())
 
+def get_time():
+    return datetime.datetime.now().strftime('%H:%M')
+
 def write_action(date, start_time, end_time, activity):
     with open('data/time/'+str(date)+'.csv', mode='a') as csv_file:
         writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        writer.writerow([start_time, end_time, activity])
+        writer.writerow([start_time, end_time, activity.code])
     return None
 
 def read_csv(date):
@@ -111,13 +114,39 @@ def SelectionMenu(activities):
     for activity in activities:
         print(activity.code)
     
-    selection = str(int(input())).upper()
+    selection = str(input()).upper()
     return findInstanceActivities(selection, activities)
 
-def 
+
+def wait_for_action():  # TODO
+    a = input()
+    
 '''write_action(datetime.datetime.date(datetime.datetime.today()), "10:15", "11:25", "SLEEP")
 write_action(datetime.datetime.date(datetime.datetime.today()), "11:25", "12:25", "WORK")'''
 
 '''read_csv(datetime.datetime.date(datetime.datetime.today()))'''
 
-saveQuestionsAnwsers(datetime.datetime.date(datetime.datetime.now()),questions, dailyQuestions(questions))
+
+
+if __name__ == "__main__":
+    while True:
+        date = get_date()
+        
+        try:
+            open('data/questions/'+str(date)+'.csv', mode='r')
+        except:
+            saveQuestionsAnwsers(date ,questions, dailyQuestions(questions))
+
+        try:
+            open('data/time/'+str(date)+'.csv', mode='r')
+        except:
+            with open('data/time/'+str(date)+'.csv', mode='w') as csv_file:
+                writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+                writer.writerow(['start_time', 'end_time', 'activity'])
+
+        current_activity = SelectionMenu(activities)
+        start_time = get_time()
+        
+        wait_for_action()
+        current_activity, last_activity = SelectionMenu(activities), current_activity
+        write_action(date, start_time, get_time(), last_activity)
