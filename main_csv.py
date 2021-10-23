@@ -114,7 +114,6 @@ def SelectionMenu(activities):
     selection = str(int(input())).upper()
     return findInstanceActivities(selection, activities)
 
-def 
 '''write_action(datetime.datetime.date(datetime.datetime.today()), "10:15", "11:25", "SLEEP")
 write_action(datetime.datetime.date(datetime.datetime.today()), "11:25", "12:25", "WORK")'''
 
