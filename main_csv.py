@@ -127,7 +127,6 @@ write_action(datetime.datetime.date(datetime.datetime.today()), "11:25", "12:25"
 '''read_csv(datetime.datetime.date(datetime.datetime.today()))'''
 
 
-
 if __name__ == "__main__":
     while True:
         date = get_date()
