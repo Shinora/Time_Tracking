@@ -117,9 +117,10 @@ def SelectionMenuActivities(activities):
     while select != 1:
         t0 = time.time()
         print("... waiting")
-        rotor.wait_for_rotate(timeout=15)
-        selection = activities[rotor.value]
-        print(activities[rotor.value].code)
+        rotor.wait_for_rotate(timeout=5)
+        index = int(rotor.value*len(activities))
+        selection = activities[index]
+        print(activities[index].code)
 
         if time.time()- t0 > 10:
             return findInstanceActivities(selection, activities)
