@@ -113,7 +113,7 @@ def saveQuestionsAnwsers(date, questions, anwsers):
     return None
 
 def SelectionMenuActivities(activities):
-    rotor = RotaryEncoder(a=21, b=20, max_steps=len(activities))
+    rotor = RotaryEncoder(a=17, b=18, max_steps=len(activities))
     select = 0
     while select != 1:
         t0 = time.time()
