@@ -1,8 +1,10 @@
 from utils import Activity, Question, Machine_State
 import datetime
+import time
 import json
 import os
 import csv
+from gpiozero import RotaryEncoder, Button
 
 
 questions = [
@@ -110,12 +112,17 @@ def saveQuestionsAnwsers(date, questions, anwsers):
             writer.writerow([questions[i].question, anwsers[i][0], anwsers[i][1]])
     return None
 
-def SelectionMenu(activities):
-    for activity in activities:
-        print(activity.code)
-    
-    selection = str(input()).upper()
-    return findInstanceActivities(selection, activities)
+def SelectionMenuActivities(activities):
+    rotor = RotaryEncoder(a=21, b=20, max_steps=len(activities))
+    select = 0
+    while select != 1:
+        t0 = time.time()
+        rotor.wait_for_rotate()
+        selection = activities[rotor.values]
+        print(activities[rotor.value].code)
+
+        if time.time()- t0 > 10:
+            return findInstanceActivities(selection, activities)
 
 
 def wait_for_action():  # TODO
@@ -143,9 +150,7 @@ if __name__ == "__main__":
                 writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
                 writer.writerow(['start_time', 'end_time', 'activity'])
 
-        current_activity = SelectionMenu(activities)
+        current_activity = SelectionMenuActivities(activities)
         start_time = get_time()
-        
-        wait_for_action()
-        current_activity, last_activity = SelectionMenu(activities), current_activity
+        current_activity, last_activity = SelectionMenuActivities(activities), current_activity
         write_action(date, start_time, get_time(), last_activity)
