@@ -95,7 +95,6 @@ def QuestionAnwser(question):
         print(selection)
         if selection in choices:
             valid = 1
-    
     return anwser
 
 def dailyQuestions(questions):
@@ -117,6 +116,7 @@ def SelectionMenuActivities(activities):
     select = 0
     while select != 1:
         t0 = time.time()
+        print("... waiting")
         rotor.wait_for_rotate()
         selection = activities[rotor.values]
         print(activities[rotor.value].code)
