@@ -117,7 +117,7 @@ def SelectionMenuActivities(activities):
     while select != 1:
         t0 = time.time()
         print("... waiting")
-        rotor.wait_for_rotate()
+        rotor.wait_for_rotate(timeout=15)
         selection = activities[rotor.values]
         print(activities[rotor.value].code)
 
