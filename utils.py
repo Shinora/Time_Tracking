@@ -1,4 +1,3 @@
-import itertools
 
 class Activity:
     name = ""

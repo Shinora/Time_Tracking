@@ -1,11 +1,9 @@
 from utils import Activity, Question, Machine_State
 import datetime
 import time
-import json
 import os
 import csv
 from gpiozero import RotaryEncoder, Button
-
 
 questions = [
 Question(question="Fast ?", code = "FAST", anwsers = [["yes",1], ["no", -1]]),
@@ -40,6 +38,7 @@ Activity(name="Home training" , category="SPO_HIG", code="SPO_HOM", duration=0.2
 
 Activity(name="Friends Hangout" , category="SOCIAL", code="FRIEND", duration=0.5, description="hanging with friends", value=0),
 Activity(name="Party" , category="SOCIAL", code="PARTY", duration=1, description="party with friends", value=-2)]
+
 
 def get_date():
     return datetime.datetime.date(datetime.datetime.now())
@@ -83,7 +82,22 @@ def findInstanceActivities(code,activities):
 
     return False
 
-def QuestionAnwser(question):
+
+def category_list(activities):
+    categories = []
+    for activity in activities:
+        if activity.category not in categories:
+            categories.append(activity.category)
+    return categories
+
+def filter_categories(activities, filter):
+    filtered = []
+    for activity in activities:
+        if activity.category == filter:
+            filtered.append(activity)
+    return filtered
+
+def questionAnwser(question):
     print(question.question)  # LCD
     choices = []
     valid = 0
@@ -100,7 +114,7 @@ def QuestionAnwser(question):
 def dailyQuestions(questions):
     anwsers = []
     for question in questions:
-        anwsers.append(QuestionAnwser(question))
+        anwsers.append(questionAnwser(question))
     return anwsers
     
 def saveQuestionsAnwsers(date, questions, anwsers): 
@@ -111,8 +125,22 @@ def saveQuestionsAnwsers(date, questions, anwsers):
             writer.writerow([questions[i].question, anwsers[i][0], anwsers[i][1]])
     return None
 
-def SelectionMenuActivities(activities, rotor):
-    
+
+def selectionMenuCategories(categories, rotor):
+    select = 0
+    while select != 1:
+        t0 = time.time()
+        print("... waiting")
+        rotor.wait_for_rotate(timeout=5)
+        index = int(rotor.value*len(categories))
+        selection = categories[index]
+        
+        if time.time()- t0 > 10:
+            return selection
+
+    return selection
+
+def selectionMenuActivities(activities, rotor):
     select = 0
     while select != 1:
         t0 = time.time()
@@ -124,27 +152,17 @@ def SelectionMenuActivities(activities, rotor):
 
         if time.time()- t0 > 10:
             return findInstanceActivities(selection, activities)
-
-
-def wait_for_action():  # TODO
-    a = input()
-    
-'''write_action(datetime.datetime.date(datetime.datetime.today()), "10:15", "11:25", "SLEEP")
-write_action(datetime.datetime.date(datetime.datetime.today()), "11:25", "12:25", "WORK")'''
-
-'''read_csv(datetime.datetime.date(datetime.datetime.today()))'''
-
+    return findInstanceActivities(selection, activities)
+ 
 rotor = RotaryEncoder(a=17, b=18, max_steps=len(activities))
 
 if __name__ == "__main__":
     while True:
         date = get_date()
-        
         try:
             open('data/questions/'+str(date)+'.csv', mode='r')
         except:
             saveQuestionsAnwsers(date ,questions, dailyQuestions(questions))
-
         try:
             open('data/time/'+str(date)+'.csv', mode='r')
         except:
@@ -152,7 +170,8 @@ if __name__ == "__main__":
                 writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
                 writer.writerow(['start_time', 'end_time', 'activity'])
 
-        current_activity = SelectionMenuActivities(activities, rotor)
+
+        current_activity = selectionMenuActivities(activities, rotor)
         start_time = get_time()
-        current_activity, last_activity = SelectionMenuActivities(activities, rotor), current_activity
+        current_activity, last_activity = selectionMenuActivities(activities, rotor), current_activity
         write_action(date, start_time, get_time(), last_activity)

@@ -14,6 +14,5 @@ def table():
             print(df)
 
 
-
 if __name__ == "__main__":
     table()
