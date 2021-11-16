@@ -12,7 +12,7 @@ from PIL import Image, ImageDraw, ImageFont
 import adafruit_ssd1306
 
 def test_pi():
-    if os.uname().machine == "arm6l":
+    if os.uname().machine == "armv6l":
         print("This is a raspberrypi, test passed !")
         return 1
     else:
