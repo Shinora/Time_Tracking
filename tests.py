@@ -21,7 +21,7 @@ def test_pi():
     
 def test_encoder():
     GPIO.setmode(GPIO.BCM)
-    e1 = Encoder(18, 17, print("* New value: {}".format(value)))
+    e1 = Encoder(18, 17, print(f"* New value: {value}"))
     start = time.time()
     try:
         while (time.time() - start) < 8:
