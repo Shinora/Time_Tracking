@@ -56,6 +56,7 @@ def test_screen():
     # Some other nice fonts to try: http://www.dafont.com/bitmap.php
     #font = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 9)
     draw.text((x, top+0), "Tests", font=font, fill=255)
+    disp.show()
     time.sleep(2)
 
 def test_battery():
