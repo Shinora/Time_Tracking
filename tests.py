@@ -1,5 +1,5 @@
 ''' The main goal of the script is to unsure all the hardware parts are properly working ... ''' 
-from gpiozero import RotaryEncoder
+from gpiozero import RotaryEncoder, Button
 from gpiozero.tools import scaled_half
 import os
 import time
@@ -9,12 +9,16 @@ from PIL import Image, ImageDraw, ImageFont
 import adafruit_ssd1306
 
 def test_pi():
-    print(os.uname().sysname)
+    print(os.uname().machine)
     
 
 def test_encoder():
-    rotor = RotaryEncoder(21, 20)
-    rotor.wait_for_active()
+    rotor = RotaryEncoder(17, 18)
+    button = Button(15)
+    print("please rotate : ")
+    rotor.wait_for_rotate()
+    print("please press button : ")
+    button.wait_for_press()
 
 def test_screen():
     # Create the I2C interface.
