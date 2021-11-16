@@ -18,10 +18,13 @@ def test_pi():
     else:
         sys.exit("This device isn't a raspberrypi")
            
-    
+
+def valueChanged(value):
+    print(f"* New value: {value}")
+
 def test_encoder():
     GPIO.setmode(GPIO.BCM)
-    e1 = Encoder(18, 17, print(f"* New value: {value}"))
+    e1 = Encoder(18, 17, valueChanged)
     start = time.time()
     try:
         while (time.time() - start) < 8:
