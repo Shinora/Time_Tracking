@@ -2,23 +2,36 @@
 from gpiozero import RotaryEncoder, Button
 from gpiozero.tools import scaled_half
 import os
+import sys
 import time
+import RPi.GPIO as GPIO
+from utils import Encoder
 from board import SCL, SDA
 import busio
 from PIL import Image, ImageDraw, ImageFont
 import adafruit_ssd1306
 
 def test_pi():
-    print(os.uname().machine)
+    if os.uname().machine == "arm6l":
+        print("This is a raspberrypi, test passed !")
+        return 1
+    else:
+        sys.exit("This device isn't a raspberrypi")
+           
     
-
 def test_encoder():
-    rotor = RotaryEncoder(17, 18)
-    button = Button(15)
-    print("please rotate : ")
-    rotor.wait_for_rotate()
-    print("please press button : ")
-    button.wait_for_press()
+    GPIO.setmode(GPIO.BCM)
+    e1 = Encoder(18, 17, print("* New value: {}".format(value)))
+    start = time.time()
+    try:
+        while (time.time() - start) < 8:
+            time.sleep(2)
+            print("Value is {}".format(e1.getValue()))
+    except Exception:
+        pass
+
+    GPIO.cleanup()
+        
 
 def test_screen():
     # Create the I2C interface.
@@ -60,15 +73,16 @@ def test_screen():
     # Some other nice fonts to try: http://www.dafont.com/bitmap.php
     #font = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 9)
     draw.text((x, top+0), "Tests", font=font, fill=255)
+    disp.image(image)
     disp.show()
     time.sleep(2)
+    draw.rectangle((0, 0, width, height), outline=0, fill=0)
 
 def test_battery():
-    print("testing battery")
+    pass
 
 
 test_pi()
 test_screen()
 test_encoder()
-
 test_battery()
