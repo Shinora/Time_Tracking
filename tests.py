@@ -9,7 +9,8 @@ from PIL import Image, ImageDraw, ImageFont
 import adafruit_ssd1306
 
 def test_pi():
-    pass
+    print(os.uname().sysname)
+    
 
 def test_encoder():
     rotor = RotaryEncoder(21, 20)
@@ -58,7 +59,7 @@ def test_screen():
     time.sleep(2)
 
 def test_battery():
-    pass
+    print("testing battery")
 
 
 test_pi()
