@@ -81,7 +81,7 @@ class Screen():
 
     # Load default font.
         self.font = ImageFont.load_default()
-        self.font = ImageFont.truetype("Retron2000.ttf", 15)
+        self.sepcialfont = ImageFont.truetype("Retron2000.ttf", 15)
     # Alternatively load a TTF font.  Make sure the .ttf font file is in the
     # same directory as the python script!
     # Some other nice fonts to try: http://www.dafont.com/bitmap.php
@@ -89,7 +89,7 @@ class Screen():
 
     def write(self, text):
         self.clear()
-        self.draw.text((self.x, self.top+0), text, font=self.font, fill=255)
+        self.draw.text((self.x, self.top+0), text, font=self.specialfont, fill=255)
         self.disp.image(self.image)
         self.disp.show()
 
@@ -97,4 +97,17 @@ class Screen():
         self.draw.rectangle((0, 0, self.width, self.height), outline=0, fill=0)
 
     def idle(self):
-        self.write(" Dodo ZzZzZzZzZ")
+        clock = """
+         .--.
+    .-._;.--.;_.-.
+   (_.'_..--.._'._)
+    /.' . 60 . '.\'
+   // .      / . \\
+  |; .      /   . |;
+  ||45    ()    15||
+  |; .          . |;
+   \\ .        . //
+    \'._' 30 '_.'/
+     '-._'--'_.-'
+         `""` """
+        self.write(clock)

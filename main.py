@@ -43,7 +43,7 @@ Activity(name="Party" , category="SOCIAL", code="PARTY", duration=1, description
 
 
 screen = Screen()
-rotor = RotaryEncoder(a=21, b=20, max_steps=len(activities)-1)
+rotor = RotaryEncoder(a=21, b=20, max_steps=len(activities)-1, wrap=True)
 button = Button(15)
 
 
@@ -172,7 +172,7 @@ if __name__ == "__main__":
                 writer.writerow(['start_time', 'end_time', 'activity'])
 
         start_time = get_time()
-        screen.clear()
+        screen.idle()
         rotor.wait_for_rotate()
         current_activity = selectionMenuActivities(activities, rotor, button, screen)
         last_activity = current_activity
