@@ -156,7 +156,7 @@ def selectionMenuActivities(activities, rotor, button, screen):
         print(activities[index].code)
         screen.write(activities[index].code)
 
-    return findInstanceActivities(selection, activities)
+    return activities[index]
     
 if __name__ == "__main__":
     while True:
