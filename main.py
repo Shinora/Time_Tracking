@@ -157,7 +157,7 @@ def selectionMenuActivities(activities, rotor, button, screen):
     t0 = time.time()
     
     while select != True:
-        select = button.is_pressed()
+        select = button.value()
         rotor.wait_for_rotate()
         index = int(rotor.steps)
         selection = activities[index]
@@ -167,7 +167,7 @@ def selectionMenuActivities(activities, rotor, button, screen):
         if time.time()- t0 > 30:
             return findInstanceActivities(selection, activities)
         
-        if button.is_pressed:
+        if button.value:
             return findInstanceActivities(selection, activities)
 
     return findInstanceActivities(selection, activities)
