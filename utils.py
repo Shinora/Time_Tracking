@@ -72,7 +72,7 @@ class Screen():
     # Draw some shapes.
     # First define some constants to allow easy resizing of shapes.
         self.padding = -2
-        self.top = padding
+        self.top = self.padding
         self.bottom = self.height-self.padding
     # Move left to right keeping track of the current x position for drawing shapes.
         self.x = 0
