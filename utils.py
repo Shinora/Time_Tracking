@@ -93,7 +93,6 @@ class Screen():
         self.disp.show()
 
     def clear(self):
-        self.image = Image.new('1', (self.width, self.height))
         self.draw.rectangle((0, 0, self.width, self.height), outline=0, fill=0)
 
     def idle(self):
