@@ -139,7 +139,7 @@ def selectionMenuCategories(categories, rotor, button, screen):
     select = 0
     t0 = time.time()
 
-    while button.values != 1:
+    while button.value != 1:
         index = int(rotor.steps)
         selection = categories[index]
         
@@ -149,10 +149,8 @@ def selectionMenuCategories(categories, rotor, button, screen):
     return selection
 
 def selectionMenuActivities(activities, rotor, button, screen):
-    select = 0
-    t0 = time.time()
-    
-    while button.values != True:
+
+    while button.value != True:
         index = int(rotor.steps)
         selection = activities[index]
         print(activities[index].code)
@@ -182,3 +180,4 @@ if __name__ == "__main__":
         button.wait_for_active()
         last_activity = current_activity
         write_action(date, start_time, get_time(), last_activity)
+        print("written to the pi storage")
