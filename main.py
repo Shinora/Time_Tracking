@@ -43,7 +43,7 @@ Activity(name="Party" , category="SOCIAL", code="PARTY", duration=1, description
 
 
 screen = Screen()
-rotor = RotaryEncoder(a=21, b=20, max_steps=len(activities), wrap=True)
+rotor = RotaryEncoder(a=21, b=20, max_steps=len(activities))
 button = Button(15)
 
 
@@ -157,7 +157,7 @@ def selectionMenuActivities(activities, rotor, button, screen):
     t0 = time.time()
     while select != 1:
         rotor.wait_for_rotate()
-        index = int(rotor.value*len(activities))
+        index = int(rotor.steps)
         selection = activities[index]
         print(activities[index].code)
         screen.write(activities[index].code)
