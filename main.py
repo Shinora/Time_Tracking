@@ -172,6 +172,7 @@ if __name__ == "__main__":
                 writer.writerow(['start_time', 'end_time', 'activity'])
 
         start_time = get_time()
+        screen.clear()
         rotor.wait_for_rotate()
         current_activity = selectionMenuActivities(activities, rotor, button, screen)
         last_activity = current_activity
