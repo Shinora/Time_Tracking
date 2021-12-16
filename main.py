@@ -43,7 +43,7 @@ Activity(name="Party" , category="SOCIAL", code="PARTY", duration=1, description
 
 
 screen = Screen()
-rotor = RotaryEncoder(a=21, b=20, max_steps=len(activities)-1)
+rotor = RotaryEncoder(a=21, b=20, max_steps=len(activities)+1)
 button = Button(15)
 
 
