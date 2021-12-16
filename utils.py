@@ -88,7 +88,7 @@ class Screen():
 
     def write(self, text):
         self.clear()
-        self.draw.text((x, top+0), text, font=self.font, fill=255)
+        self.draw.text((self.x, self.top+0), text, font=self.font, fill=255)
         self.disp.image(self.image)
         self.disp.show()
 
