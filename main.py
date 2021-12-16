@@ -154,7 +154,7 @@ def selectionMenuActivities(activities, rotor):
             return findInstanceActivities(selection, activities)
     return findInstanceActivities(selection, activities)
  
-rotor = RotaryEncoder(a=17, b=18, max_steps=len(activities))
+rotor = RotaryEncoder(a=21, b=20, max_steps=len(activities))
 
 if __name__ == "__main__":
     while True:
