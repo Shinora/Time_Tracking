@@ -94,9 +94,14 @@ class Screen():
         self.disp.show()
 
     def clear(self):
+        self.x=0
+        self.disp.fill(0)
+        self.image = Image.new('1', (self.width, self.height))
+        self.draw = ImageDraw.Draw(self.image)
         self.draw.rectangle((0, 0, self.width, self.height), outline=0, fill=0)
 
     def idle(self):
+        self.clear()
         clock = """
          .--.
     .-._;.--.;_.-.
@@ -110,4 +115,6 @@ class Screen():
     \'._' 30 '_.'/
      '-._'--'_.-'
          `""` """
-        self.write(clock)
+        self.draw.text((self.x, self.top+0), text, font=self.font, fill=255)
+        self.disp.image(self.image)
+        self.disp.show()
