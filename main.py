@@ -56,13 +56,13 @@ def get_time():
     return datetime.datetime.now().strftime('%H:%M')
 
 def write_action(date, start_time, end_time, activity):
-    with open('data/time/'+str(date)+'.csv', mode='a') as csv_file:
+    with open('data/time/'+str(date)+'.csv', mode='a+') as csv_file:
         writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         writer.writerow([start_time, end_time, activity.code])
     return None
 
 def read_csv(date):
-    with open('data/time/'+str(date)+'.csv', mode='r') as csv_file:
+    with open('data/time/'+str(date)+'.csv', mode='r', newline='') as csv_file:
         csv_reader = csv.DictReader(csv_file)
         for row in csv_reader:
             print(row)
@@ -127,9 +127,9 @@ def dailyQuestions(questions):
     return anwsers
     
 def saveQuestionsAnwsers(date, questions, anwsers): 
-    with open('data/questions/'+str(date)+'.csv', mode='w') as csv_file:
+    with open('data/questions/'+str(date)+'.csv', mode='w', newline='') as csv_file:
         writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        writer.writerow(['question', 'anwser', 'points'])
+        writer.writeheader(['question', 'anwser', 'points'])
         for i in range(len(questions)):
             writer.writerow([questions[i].question, anwsers[i][0], anwsers[i][1]])
     return None
