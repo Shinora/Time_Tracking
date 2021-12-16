@@ -189,5 +189,5 @@ if __name__ == "__main__":
 
         current_activity = selectionMenuActivities(activities, rotor, button, screen)
         start_time = get_time()
-        current_activity, last_activity = selectionMenuActivities(activities, rotor, screen), current_activity
+        current_activity, last_activity = selectionMenuActivities(activities, rotor, button, screen), current_activity
         write_action(date, start_time, get_time(), last_activity)
