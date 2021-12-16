@@ -39,6 +39,15 @@ Activity(name="Home training" , category="SPO_HIG", code="SPO_HOM", duration=0.2
 Activity(name="Friends Hangout" , category="SOCIAL", code="FRIEND", duration=0.5, description="hanging with friends", value=0),
 Activity(name="Party" , category="SOCIAL", code="PARTY", duration=1, description="party with friends", value=-2)]
 
+#--------------------------- HARDWARE SETUP -------------------------------------------
+
+
+screen = Screen()
+rotor = RotaryEncoder(a=21, b=20, max_steps=len(activities))
+button = Button(15)
+
+
+#--------------------------------------------------------------------------------------
 
 def get_date():
     return datetime.datetime.date(datetime.datetime.now())
@@ -126,7 +135,7 @@ def saveQuestionsAnwsers(date, questions, anwsers):
     return None
 
 
-def selectionMenuCategories(categories, rotor, button):
+def selectionMenuCategories(categories, rotor, button, screen):
     select = 0
     t0 = time.time()
     button.when_held()
@@ -143,7 +152,7 @@ def selectionMenuCategories(categories, rotor, button):
 
     return selection
 
-def selectionMenuActivities(activities, rotor, button):
+def selectionMenuActivities(activities, rotor, button, screen):
     select = 0
     t0 = time.time()
     while select != 1:
@@ -151,7 +160,7 @@ def selectionMenuActivities(activities, rotor, button):
         index = int(rotor.value*len(activities))
         selection = activities[index]
         print(activities[index].code)
-        Screen.write(activities[index].code)
+        screen.write(activities[index].code)
 
         if time.time()- t0 > 30:
             return findInstanceActivities(selection, activities)
@@ -160,9 +169,7 @@ def selectionMenuActivities(activities, rotor, button):
             return findInstanceActivities(selection, activities)
 
     
- 
-rotor = RotaryEncoder(a=21, b=20, max_steps=len(activities))
-button = Button(15)
+
 
 if __name__ == "__main__":
     while True:
