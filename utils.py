@@ -79,9 +79,9 @@ class Screen():
     # Move left to right keeping track of the current x position for drawing shapes.
         self.x = 0
 
-
     # Load default font.
-
+        self.font = ImageFont.load_default()
+        self.font = ImageFont.load("Retron2000.ttf")
     # Alternatively load a TTF font.  Make sure the .ttf font file is in the
     # same directory as the python script!
     # Some other nice fonts to try: http://www.dafont.com/bitmap.php
@@ -89,7 +89,7 @@ class Screen():
 
     def write(self, text):
         self.clear()
-        self.draw.text((self.x, self.top+0), text, font=ImageFont.truetype('assets/Retron2000.ttf', 15), fill=255)
+        self.draw.text((self.x, self.top+20), text, font=self.font, fill=255)
         self.disp.image(self.image)
         self.disp.show()
 
@@ -98,4 +98,4 @@ class Screen():
         self.draw.rectangle((0, 0, self.width, self.height), outline=0, fill=0)
 
     def idle(self):
-        pass
+        self.write(" Dodo ZzZzZzZzZ")
