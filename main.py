@@ -156,8 +156,7 @@ def selectionMenuActivities(activities, rotor, button, screen):
     select = 0
     t0 = time.time()
     
-    while select != True:
-        rotor.wait_for_rotate()
+    while button.values != True:
         index = int(rotor.steps)
         selection = activities[index]
         print(activities[index].code)
