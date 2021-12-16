@@ -54,7 +54,6 @@ class Screen():
     # The first two parameters are the pixel width and pixel height.  Change these
     # to the right size for your display!
     disp = adafruit_ssd1306.SSD1306_I2C(128, 32, i2c)
-    font = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 25)
 
     def __init__(self):
     # Clear display.
@@ -82,7 +81,6 @@ class Screen():
 
 
     # Load default font.
-        self.font = ImageFont.load_default()
 
     # Alternatively load a TTF font.  Make sure the .ttf font file is in the
     # same directory as the python script!
@@ -91,7 +89,7 @@ class Screen():
 
     def write(self, text):
         self.clear()
-        self.draw.text((self.x, self.top+0), text, font=self.font, fill=255)
+        self.draw.text((self.x, self.top+0), text, font=ImageFont.truetype('assets/Retron2000.ttf', 15), fill=255)
         self.disp.image(self.image)
         self.disp.show()
 
