@@ -115,6 +115,6 @@ class Screen():
     \'._' 30 '_.'/
      '-._'--'_.-'
          `""` """
-        self.draw.text((self.x, self.top+0), text, font=self.font, fill=255)
+        self.draw.text((self.x, self.top+0), clock, font=self.font, fill=255)
         self.disp.image(self.image)
         self.disp.show()
