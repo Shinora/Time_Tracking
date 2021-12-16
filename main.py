@@ -1,4 +1,4 @@
-from utils import Activity, Question, Machine_State
+from utils import Activity, Question, Machine_State, Screen
 import datetime
 import time
 import os
@@ -126,35 +126,43 @@ def saveQuestionsAnwsers(date, questions, anwsers):
     return None
 
 
-def selectionMenuCategories(categories, rotor):
+def selectionMenuCategories(categories, rotor, button):
     select = 0
+    t0 = time.time()
+    button.when_held()
     while select != 1:
-        t0 = time.time()
-        print("... waiting")
-        rotor.wait_for_rotate(timeout=5)
+        rotor.wait_for_rotate()
         index = int(rotor.value*len(categories))
         selection = categories[index]
         
-        if time.time()- t0 > 10:
+        if time.time()- t0 > 30:
+            return selection
+        
+        if button.is_pressed:
             return selection
 
     return selection
 
-def selectionMenuActivities(activities, rotor):
+def selectionMenuActivities(activities, rotor, button):
     select = 0
+    t0 = time.time()
     while select != 1:
-        t0 = time.time()
-        print("... waiting")
-        rotor.wait_for_rotate(timeout=5)
+        rotor.wait_for_rotate()
         index = int(rotor.value*len(activities))
         selection = activities[index]
         print(activities[index].code)
+        Screen.write(activities[index].code)
 
-        if time.time()- t0 > 10:
+        if time.time()- t0 > 30:
             return findInstanceActivities(selection, activities)
-    return findInstanceActivities(selection, activities)
+        
+        if button.is_pressed:
+            return findInstanceActivities(selection, activities)
+
+    
  
 rotor = RotaryEncoder(a=21, b=20, max_steps=len(activities))
+button = Button(15)
 
 if __name__ == "__main__":
     while True:
@@ -171,7 +179,7 @@ if __name__ == "__main__":
                 writer.writerow(['start_time', 'end_time', 'activity'])
 
 
-        current_activity = selectionMenuActivities(activities, rotor)
+        current_activity = selectionMenuActivities(activities, rotor, button)
         start_time = get_time()
         current_activity, last_activity = selectionMenuActivities(activities, rotor), current_activity
         write_action(date, start_time, get_time(), last_activity)

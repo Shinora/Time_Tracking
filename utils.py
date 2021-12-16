@@ -1,4 +1,9 @@
 import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
+from board import SCL, SDA
+import busio
+from PIL import Image, ImageDraw, ImageFont
+import adafruit_ssd1306
 
 class Activity:
     name = ""
@@ -38,3 +43,54 @@ class Machine_State():
         self.current_date = date
         self.date_last_record = date_last_record
         self.hour_last_record = hour_last_record
+
+
+class Screen():
+    # Create the I2C interface.
+    i2c = busio.I2C(SCL, SDA)
+    # Create the SSD1306 OLED class.
+    # The first two parameters are the pixel width and pixel height.  Change these
+    # to the right size for your display!
+    disp = adafruit_ssd1306.SSD1306_I2C(128, 32, i2c)
+
+    def __init__(self):
+    # Clear display.
+        self.disp.fill(0)
+        self.disp.show()
+
+    # Create blank image for drawing.
+    # Make sure to create image with mode '1' for 1-bit color.
+        self.width = self.disp.width
+        self.height = self.disp.height
+        self.image = Image.new('1', (width, height))
+
+    # Get drawing object to draw on image.
+        self.draw = ImageDraw.Draw(image)
+
+    # Draw a black filled box to clear the image.
+        self.draw.rectangle((0, 0, width, height), outline=0, fill=0)
+    # Draw some shapes.
+    # First define some constants to allow easy resizing of shapes.
+        self.padding = -2
+        self.top = padding
+        self.bottom = height-padding
+    # Move left to right keeping track of the current x position for drawing shapes.
+        self.x = 0
+
+
+    # Load default font.
+        self.font = ImageFont.load_default()
+
+    # Alternatively load a TTF font.  Make sure the .ttf font file is in the
+    # same directory as the python script!
+    # Some other nice fonts to try: http://www.dafont.com/bitmap.php
+    #font = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 9)
+
+    def write(self, text):
+        self.clear()
+        self.draw.text((x, top+0), text, font=font, fill=255)
+        self.disp.image(image)
+        self.disp.show()
+
+    def clear(self):
+        self.draw.rectangle((0, 0, width, height), outline=0, fill=0)
