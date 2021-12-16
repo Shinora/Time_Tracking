@@ -5,7 +5,6 @@ import os
 import sys
 import time
 import RPi.GPIO as GPIO
-from utils import Encoder
 from board import SCL, SDA
 import busio
 from PIL import Image, ImageDraw, ImageFont
