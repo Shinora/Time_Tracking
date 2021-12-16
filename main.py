@@ -149,7 +149,7 @@ def selectionMenuCategories(categories, rotor, button, screen):
     return selection
 
 def selectionMenuActivities(activities, rotor, button, screen):
-
+    index = 0
     while button.value != True:
         index = int(rotor.steps)
         selection = activities[index]
