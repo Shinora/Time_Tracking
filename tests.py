@@ -22,7 +22,7 @@ def valueChanged(value):
     print(f"* New value: {value}")
 
 def test_encoder():
-    rotor = RotaryEncoder(a=17, b=6, max_steps=10)
+    rotor = RotaryEncoder(a=11, b=12, max_steps=10)
     button = Button(15)
     print(" Press the button : ")   
     button.wait_for_press()
