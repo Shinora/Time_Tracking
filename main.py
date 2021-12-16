@@ -172,12 +172,10 @@ if __name__ == "__main__":
                 writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
                 writer.writerow(['start_time', 'end_time', 'activity'])
 
-
-        current_activity = selectionMenuActivities(activities, rotor, button, screen)
         start_time = get_time()
+        rotor.wait_for_rotate()
+        current_activity = selectionMenuActivities(activities, rotor, button, screen)
         screen.clear()
-        button.wait_for_active()
-        button.wait_for_active()
         last_activity = current_activity
         write_action(date, start_time, get_time(), last_activity)
         print("written to the pi storage")
