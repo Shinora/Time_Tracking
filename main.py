@@ -11,7 +11,9 @@ Question(question = "Stretching ?", code = "STRETCH", anwsers = [["yes",1], ["no
 Question(question = "Alcohol ?", code = "ALCO", anwsers = [["no",0],["some",-1], ["lots", -3]]),
 Question(question = "Sexual activity ?", code = "SEX", anwsers = [["yes",-2],["no", 1]]),
 Question(question = "Sugar ?", code = "SUGAR", anwsers = [["no",2],["some",-1], ["lots", -3]]),
-Question(question = "Meat ?", code = "MEAT", anwsers = [["yes",-1], ["no", 1]])
+Question(question = "Meat ?", code = "MEAT", anwsers = [["yes",-1], ["no", 1]]),
+Question(question = "Sport ?", code = "SPORT", anwsers = [["yes",1], ["no", -1]]),
+
 ]
 
 activities = [Activity(name="Sleep", category="LIFE", code="SLEEP", duration=1, description="sleeping", value=0), 
@@ -35,9 +37,13 @@ Activity(name="Yoga" , category="SPO_LOW", code="YOGA", duration =0.25, descript
 Activity(name="Stretching" , category="SPO_LOW", code="STRETCH", duration=0.25, description="stretching", value=1),
 Activity(name="Volley" , category="SPO_MID", code="VOLLEY", duration=0.5, description="playing volley ball", value=0),
 Activity(name="Home training" , category="SPO_HIG", code="SPO_HOM", duration=0.25, description="high intensity cardio and workout at home", value=1),
+Activity(name="Jujitsu" , category="SPO_HIG", code="JJB", duration=1, description="jujitsu classes", value=1),
 
 Activity(name="Friends Hangout" , category="SOCIAL", code="FRIEND", duration=0.5, description="hanging with friends", value=0),
-Activity(name="Party" , category="SOCIAL", code="PARTY", duration=1, description="party with friends", value=-2)]
+Activity(name="Party" , category="SOCIAL", code="PARTY", duration=1, description="party with friends", value=0),
+Activity(name="Phone scrolling" , category="WASTE", code="PHONE", duration=1, description="scrolling some nonsense on my phone", value=-2),
+Activity(name="Doing Nothing" , category="WASTE", code="NOTHING", duration=1, description="beoing so lost and unproductive that i dont do anything", value=-1),
+Activity(name="Video Games and related" , category="WASTE", code="GAMES", duration=1, description="playing with no educational or social purpose", value=-1)]
 
 #--------------------------- HARDWARE SETUP -------------------------------------------
 
@@ -107,7 +113,8 @@ def filter_categories(activities, filter):
     return filtered
 
 def questionAnwser(question):
-    print(question.question)  # LCD
+    print(question.question)
+    screen.write(question.question)
     choices = []
     valid = 0
     for anwser in question.anwsers:

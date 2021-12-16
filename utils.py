@@ -116,7 +116,7 @@ class Screen():
     \'._' 30 '_.'/
      '-._'--'_.-'
          `""` """
-        text = " -- IDLE MODE IS ON -- "
+        text = " - IDLE MODE IS ON - "
         self.draw.text((self.x, self.top+0), text, font=self.font, fill=255)
         self.disp.image(self.image)
         self.disp.show()
