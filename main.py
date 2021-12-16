@@ -162,7 +162,7 @@ def selectionMenuActivities(activities, rotor, button, screen):
         print(activities[index].code)
         screen.write(activities[index].code)
 
-        if time.time()- t0 > 30:
+        if time.time()-t0 > 30:
             return findInstanceActivities(selection, activities)
         
         if button.value:
@@ -187,5 +187,6 @@ if __name__ == "__main__":
 
         current_activity = selectionMenuActivities(activities, rotor, button, screen)
         start_time = get_time()
-        current_activity, last_activity = selectionMenuActivities(activities, rotor, button, screen), current_activity
+        last_activity = current_activity
+        current_activity = selectionMenuActivities(activities, rotor, button, screen)
         write_action(date, start_time, get_time(), last_activity)
