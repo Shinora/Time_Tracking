@@ -62,18 +62,18 @@ class Screen():
     # Make sure to create image with mode '1' for 1-bit color.
         self.width = self.disp.width
         self.height = self.disp.height
-        self.image = Image.new('1', (width, height))
+        self.image = Image.new('1', (self.width, self.height))
 
     # Get drawing object to draw on image.
-        self.draw = ImageDraw.Draw(image)
+        self.draw = ImageDraw.Draw(self.image)
 
     # Draw a black filled box to clear the image.
-        self.draw.rectangle((0, 0, width, height), outline=0, fill=0)
+        self.draw.rectangle((0, 0, self.width, self.height), outline=0, fill=0)
     # Draw some shapes.
     # First define some constants to allow easy resizing of shapes.
         self.padding = -2
         self.top = padding
-        self.bottom = height-padding
+        self.bottom = self.height-self.padding
     # Move left to right keeping track of the current x position for drawing shapes.
         self.x = 0
 
@@ -88,9 +88,9 @@ class Screen():
 
     def write(self, text):
         self.clear()
-        self.draw.text((x, top+0), text, font=font, fill=255)
-        self.disp.image(image)
+        self.draw.text((x, top+0), text, font=self.font, fill=255)
+        self.disp.image(self.image)
         self.disp.show()
 
     def clear(self):
-        self.draw.rectangle((0, 0, width, height), outline=0, fill=0)
+        self.draw.rectangle((0, 0, self.width, self.height), outline=0, fill=0)
