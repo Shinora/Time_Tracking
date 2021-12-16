@@ -138,16 +138,12 @@ def saveQuestionsAnwsers(date, questions, anwsers):
 def selectionMenuCategories(categories, rotor, button, screen):
     select = 0
     t0 = time.time()
-    button.when_held()
-    while select != 1:
-        rotor.wait_for_rotate()
-        index = int(rotor.value*len(categories))
+
+    while button.values != 1:
+        index = int(rotor.steps)
         selection = categories[index]
         
         if time.time()- t0 > 30:
-            return selection
-        
-        if button.is_pressed:
             return selection
 
     return selection
@@ -161,12 +157,6 @@ def selectionMenuActivities(activities, rotor, button, screen):
         selection = activities[index]
         print(activities[index].code)
         screen.write(activities[index].code)
-
-        if time.time()-t0 > 30:
-            return findInstanceActivities(selection, activities)
-        
-        if button.value:
-            return findInstanceActivities(selection, activities)
 
     return findInstanceActivities(selection, activities)
     
@@ -187,6 +177,8 @@ if __name__ == "__main__":
 
         current_activity = selectionMenuActivities(activities, rotor, button, screen)
         start_time = get_time()
+        screen.clear()
+        button.wait_for_active()
+        button.wait_for_active()
         last_activity = current_activity
-        current_activity = selectionMenuActivities(activities, rotor, button, screen)
         write_action(date, start_time, get_time(), last_activity)
