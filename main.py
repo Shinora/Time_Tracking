@@ -136,7 +136,6 @@ def saveQuestionsAnwsers(date, questions, anwsers):
 
 
 def selectionMenuCategories(categories, rotor, button, screen):
-    select = 0
     t0 = time.time()
 
     while button.value != 1:
@@ -175,7 +174,6 @@ if __name__ == "__main__":
         start_time = get_time()
         rotor.wait_for_rotate()
         current_activity = selectionMenuActivities(activities, rotor, button, screen)
-        screen.clear()
         last_activity = current_activity
         write_action(date, start_time, get_time(), last_activity)
         print("written to the pi storage")
