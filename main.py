@@ -155,7 +155,9 @@ def selectionMenuCategories(categories, rotor, button, screen):
 def selectionMenuActivities(activities, rotor, button, screen):
     select = 0
     t0 = time.time()
-    while select != 1:
+    
+    while select != True:
+        select = button.is_pressed()
         rotor.wait_for_rotate()
         index = int(rotor.steps)
         selection = activities[index]
@@ -168,9 +170,8 @@ def selectionMenuActivities(activities, rotor, button, screen):
         if button.is_pressed:
             return findInstanceActivities(selection, activities)
 
+    return findInstanceActivities(selection, activities)
     
-
-
 if __name__ == "__main__":
     while True:
         date = get_date()
