@@ -176,6 +176,7 @@ if __name__ == "__main__":
         rotor.wait_for_rotate()
         current_activity = selectionMenuActivities(activities, rotor, button, screen)
         screen.clear()
+        screen.idle()
         last_activity = current_activity
         write_action(date, start_time, get_time(), last_activity)
         print("written to the pi storage")

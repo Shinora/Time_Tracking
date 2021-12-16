@@ -2,6 +2,8 @@ import RPi.GPIO as GPIO
 import RPi.GPIO as GPIO
 from board import SCL, SDA
 import busio
+import time
+import sys
 from PIL import Image, ImageDraw, ImageFont
 import adafruit_ssd1306
 
@@ -93,4 +95,8 @@ class Screen():
         self.disp.show()
 
     def clear(self):
+        self.image = Image.new('1', (self.width, self.height))
         self.draw.rectangle((0, 0, self.width, self.height), outline=0, fill=0)
+
+    def idle(self):
+        self.write("      _                 _              ___| | ___  ___ _ __ (_)_ __   __ _ \n / __| |/ _ \/ _ \ '_ \| | '_ \ / _` | \n \__ \ |  __/  __/ |_) | | | | | (_| |\n|___/_|\___|\___| .__/|_|_| |_|\__, | \n      |_|            |___/ ")
