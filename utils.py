@@ -54,6 +54,7 @@ class Screen():
     # The first two parameters are the pixel width and pixel height.  Change these
     # to the right size for your display!
     disp = adafruit_ssd1306.SSD1306_I2C(128, 32, i2c)
+    font = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 25)
 
     def __init__(self):
     # Clear display.
@@ -99,4 +100,4 @@ class Screen():
         self.draw.rectangle((0, 0, self.width, self.height), outline=0, fill=0)
 
     def idle(self):
-        self.write("      _                 _              ___| | ___  ___ _ __ (_)_ __   __ _ \n / __| |/ _ \/ _ \ '_ \| | '_ \ / _` | \n \__ \ |  __/  __/ |_) | | | | | (_| |\n|___/_|\___|\___| .__/|_|_| |_|\__, | \n      |_|            |___/ ")
+        pass
