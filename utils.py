@@ -81,6 +81,7 @@ class Screen():
 
     # Load default font.
         self.font = ImageFont.load_default()
+        self.font = ImageFont.truetype("Retron2000.ttf", 15)
     # Alternatively load a TTF font.  Make sure the .ttf font file is in the
     # same directory as the python script!
     # Some other nice fonts to try: http://www.dafont.com/bitmap.php
