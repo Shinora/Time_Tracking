@@ -112,7 +112,7 @@ def filter_categories(activities, filter):
             filtered.append(activity)
     return filtered
 
-def questionAnwser(question):
+'''def questionAnwser(question):
     print(question.question)
     screen.write(question.question)
     choices = []
@@ -126,11 +126,23 @@ def questionAnwser(question):
         if selection in choices:
             valid = 1
     return anwser
+'''
 
-def dailyQuestions(questions):
+def questionAnwser(question, rotor, button, screen):
+    index = 0
+    screen.write(question.question)
+    while button.value != True:
+        index = int(rotor.steps)
+        selection = question.anwsers[index]
+        print(question.anwsers[index])
+        screen.write(question.anwsers[index])
+
+    return question.anwsers[index]
+
+def dailyQuestions(questions, rotor, button, screen):
     anwsers = []
     for question in questions:
-        anwsers.append(questionAnwser(question))
+        anwsers.append(questionAnwser(question, rotor, button, screen))
     return anwsers
     
 def saveQuestionsAnwsers(date, questions, anwsers): 
@@ -170,7 +182,7 @@ if __name__ == "__main__":
         try:
             open('data/questions/'+str(date)+'.csv', mode='r')
         except:
-            saveQuestionsAnwsers(date ,questions, dailyQuestions(questions))
+            saveQuestionsAnwsers(date ,questions, dailyQuestions(questions, rotor, button, screen))
         try:
             open('data/time/'+str(date)+'.csv', mode='r')
         except:
