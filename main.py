@@ -130,7 +130,7 @@ def questionAnwser(question):
 def dailyQuestions(questions, rotor, button, screen):
     anwsers = []
     for question in questions:
-        anwsers.append(questionAnwser(question, rotor, button, screen))
+        anwsers.append(questionAnwser(question))
     return anwsers
     
 def saveQuestionsAnwsers(date, questions, anwsers): 
