@@ -3,6 +3,7 @@ import datetime
 import time
 import os
 import csv
+import requests
 from gpiozero import RotaryEncoder, Button
 
 questions = [
@@ -19,6 +20,7 @@ Question(question = "Sport ?", code = "SPORT", anwsers = [["yes",1], ["no", -1]]
 activities = [Activity(name="Sleep", category="LIFE", code="SLEEP", duration=1, description="sleeping", value=0), 
 Activity(name="Eating", category="LIFE", code="EAT", duration=0.25, description="eating time", value=0),
 Activity(name = "Cooking", category="LIFE", code="COOK", duration=0.25, description="cooking anything", value=0.5),
+Activity(name = "Cleaning", category="LIFE", code="CLEAN", duration=0.25, description="cleaning myself and the flat", value=0),
 
 Activity(name="Reeding", category="CULTURE", code="REE", duration=0.25, description="reeding books", value=1),
 
@@ -41,6 +43,7 @@ Activity(name="Jujitsu" , category="SPO_HIG", code="JJB", duration=1, descriptio
 
 Activity(name="Friends Hangout" , category="SOCIAL", code="FRIEND", duration=0.5, description="hanging with friends", value=0),
 Activity(name="Party" , category="SOCIAL", code="PARTY", duration=1, description="party with friends", value=0),
+
 Activity(name="Phone scrolling" , category="WASTE", code="PHONE", duration=1, description="scrolling some nonsense on my phone", value=-2),
 Activity(name="Doing Nothing" , category="WASTE", code="NOTHING", duration=1, description="beoing so lost and unproductive that i dont do anything", value=-1),
 Activity(name="Video Games and related" , category="WASTE", code="GAMES", duration=1, description="playing with no educational or social purpose", value=-1)]
@@ -163,8 +166,23 @@ def selectionMenuActivities(activities, rotor, button, screen):
         screen.write(activities[index].code)
 
     return activities[index]
-    
+
+
+def send_data():
+    # if connexion internet stable
+    url = "http://192.168.1.20:5000/upload"
+    for filename in listdir("data/time"):
+        csvfile = open(filename, "rb")
+        reponse = requests.post(url, files = {"file": csvfile})
+        if test_response.ok:
+            print("Upload completed successfully!")
+            print(test_response.text)
+        else:
+            print("Something went wrong!")
+
+last_time = datetime.datetime.time()
 if __name__ == "__main__":
+
     while True:
         date = get_date()
         try:
@@ -185,3 +203,6 @@ if __name__ == "__main__":
         last_activity = current_activity
         write_action(date, start_time, get_time(), last_activity)
         print("written to the pi storage")
+        if datetime.datetime.time() - last_time > 1800:
+            send_data()
+            last_time = datetime.datetime.time()
