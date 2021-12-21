@@ -136,7 +136,7 @@ def dailyQuestions(questions, rotor, button, screen):
 def saveQuestionsAnwsers(date, questions, anwsers): 
     with open('data/questions/'+str(date)+'.csv', mode='w', newline='') as csv_file:
         writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        writer.writeheader(['question', 'anwser', 'points'])
+        writer.writerow(['question', 'anwser', 'points'])
         for i in range(len(questions)):
             writer.writerow([questions[i].question, anwsers[i][0], anwsers[i][1]])
     return None
