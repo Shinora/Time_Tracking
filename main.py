@@ -180,7 +180,7 @@ def send_data():
         else:
             print("Something went wrong!")
 
-last_time = datetime.datetime.time()
+last_time = time.time()
 if __name__ == "__main__":
 
     while True:
@@ -203,6 +203,6 @@ if __name__ == "__main__":
         last_activity = current_activity
         write_action(date, start_time, get_time(), last_activity)
         print("written to the pi storage")
-        if datetime.datetime.time() - last_time > 1800:
+        if time.time() - last_time > 600:
             send_data()
-            last_time = datetime.datetime.time()
+            last_time = time.time()
