@@ -112,7 +112,7 @@ def filter_categories(activities, filter):
             filtered.append(activity)
     return filtered
 
-'''def questionAnwser(question):
+def questionAnwser(question):
     print(question.question)
     screen.write(question.question)
     choices = []
@@ -126,18 +126,6 @@ def filter_categories(activities, filter):
         if selection in choices:
             valid = 1
     return anwser
-'''
-
-def questionAnwser(question, rotor, button, screen):
-    index = 0
-    screen.write(question.question)
-    while button.value != True:
-        index = int(rotor.steps)
-        selection = question.anwsers[index]
-        print(question.anwsers[index])
-        screen.write(question.anwsers[index])
-
-    return question.anwsers[index]
 
 def dailyQuestions(questions, rotor, button, screen):
     anwsers = []
