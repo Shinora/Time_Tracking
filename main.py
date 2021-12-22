@@ -174,9 +174,9 @@ def send_data():
     for filename in os.listdir("data/time"):
         csvfile = open("data/time/"+str(filename), "rb")
         reponse = requests.post(url, files = {"file": csvfile})
-        if test_response.ok:
+        if response.ok:
             print("Upload completed successfully!")
-            print(test_response.text)
+            print(response.text)
         else:
             print("Something went wrong!")
 
