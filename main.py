@@ -186,13 +186,15 @@ def get_quote():
     url = "http://192.168.1.20:5000/quote"
     try:
         response = requests.get(url)
-        if response.ok:
-            print("updated quote")
-            return response.text
+        print(response)
+        
+        print("updated quote")
+        print(response.text)
+        return response.text
+
     except: pass
 
 last_time = time.time()
-quote = "Dream it, then do it"
 if __name__ == "__main__":
 
     while True:
@@ -210,12 +212,10 @@ if __name__ == "__main__":
 
         start_time = get_time()
         screen.idle()
-        screen.write(quote)
         rotor.wait_for_rotate()
         current_activity = selectionMenuActivities(activities, rotor, button, screen)
         last_activity = current_activity
         write_action(date, start_time, get_time(), last_activity)
         if time.time() - last_time > 10:
             send_data()
-            quote = get_quote()
             last_time = time.time()
