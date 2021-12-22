@@ -160,7 +160,6 @@ def selectionMenuActivities(activities, rotor, button, screen):
     while button.value != True:
         index = int(rotor.steps)
         selection = activities[index]
-        print(activities[index].code)
         screen.write(activities[index].code)
 
     return activities[index]
@@ -174,11 +173,12 @@ def send_data():
         for filename in os.listdir("data/time"):
             with open("data/time/"+str(filename), "rb") as csvfile:
                 response = requests.post(url, files = {"file": csvfile}, timeout=10)
-            if response.ok:
-                if filename != today+str(".csv"):
-                    #os.remove("data/time/"+str(filename))
-                    print("Et hop on remove "+ str(filename)+ " de la carte SD de la pi")
-    except: pass
+                if response.ok:
+                    if filename != today+str(".csv"):
+                        #os.remove("data/time/"+str(filename))
+                        print("Et hop on remove "+ str(filename)+ " de la carte SD de la pi")
+    except: 
+        print("error when sending file")
             
 def get_quote():   # NOT WORKING, I MIGHT NEED TO USE BEAUTIFULSOUP
     url = "http://localhost:5000/quote"  
