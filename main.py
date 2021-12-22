@@ -173,9 +173,9 @@ def send_data():
     url = "http://192.168.1.20:5000/upload"
     for filename in os.listdir("data/time"):
         print(filename)
-        csvfile = {"file": open("data/time/"+str(filename), "rb")}
+        csvfile = {"file": open("/home/simon/Documents/Code/Projects/Time_Tracking/data/time/"+str(filename), "rb")}
         print(csvfile)
-        reponse = requests.post(url, files = csvfile)
+        reponse = requests.post(url, files = csvfile, timeout=10)
         if response.ok:
             print("Upload completed successfully!")
             print(response.text)
