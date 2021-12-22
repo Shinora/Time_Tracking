@@ -172,7 +172,6 @@ def send_data():
     # if connexion internet stable
     
     url = "http://192.168.1.20:5000/upload"
-    url = "https://httpbin.org/post"
     for filename in os.listdir("data/time"):
         with open("data/time/"+str(filename), "rb") as csvfile:
             print(csvfile)
