@@ -55,7 +55,6 @@ screen = Screen()
 rotor = RotaryEncoder(a=21, b=20, max_steps=len(activities)-1, wrap=True)
 button = Button(15)
 
-
 #--------------------------------------------------------------------------------------
 
 def get_date():
@@ -147,7 +146,6 @@ def saveQuestionsAnwsers(date, questions, anwsers):
 
 def selectionMenuCategories(categories, rotor, button, screen):
     t0 = time.time()
-
     while button.value != 1:
         index = int(rotor.steps)
         selection = categories[index]
@@ -171,7 +169,7 @@ def selectionMenuActivities(activities, rotor, button, screen):
 def send_data():
     # if connexion internet stable
     today = get_date()
-    url = "http://192.168.1.20:5000/upload"
+    url = "http://localhost:5000/upload"
     try:
         for filename in os.listdir("data/time"):
             with open("data/time/"+str(filename), "rb") as csvfile:
@@ -182,8 +180,8 @@ def send_data():
                     print("Et hop on remove "+ str(filename)+ " de la carte SD de la pi")
     except: pass
             
-def get_quote():
-    url = "http://192.168.1.20:5000/quote"
+def get_quote():   # NOT WORKING, I MIGHT NEED TO USE BEAUTIFULSOUP
+    url = "http://localhost:5000/quote"  
     try:
         response = requests.get(url)
         print(response)
