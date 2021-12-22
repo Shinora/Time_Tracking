@@ -171,7 +171,7 @@ def selectionMenuActivities(activities, rotor, button, screen):
 def send_data():
     # if connexion internet stable
     
-    url = "http://192.168.1.20:5000/upload"
+    url = "http://localhost:5000/upload"
     for filename in os.listdir("data/time"):
         with open("data/time/"+str(filename), "rb") as csvfile:
             print(csvfile)
