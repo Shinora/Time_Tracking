@@ -172,7 +172,7 @@ def send_data():
     # if connexion internet stable
     url = "http://192.168.1.20:5000/upload"
     for filename in os.listdir("data/time"):
-        csvfile = open(filename, "rb")
+        csvfile = open("data/time/"+str(filename), "rb")
         reponse = requests.post(url, files = {"file": csvfile})
         if test_response.ok:
             print("Upload completed successfully!")
@@ -203,6 +203,6 @@ if __name__ == "__main__":
         last_activity = current_activity
         write_action(date, start_time, get_time(), last_activity)
         print("written to the pi storage")
-        if time.time() - last_time > 600:
+        if time.time() - last_time > 30:
             send_data()
             last_time = time.time()
