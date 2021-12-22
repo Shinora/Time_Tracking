@@ -170,19 +170,29 @@ def selectionMenuActivities(activities, rotor, button, screen):
 
 def send_data():
     # if connexion internet stable
-    
+    today = get_date()
     url = "http://192.168.1.20:5000/upload"
-    for filename in os.listdir("data/time"):
-        with open("data/time/"+str(filename), "rb") as csvfile:
-            print(csvfile)
-            response = requests.post(url, files = {"file": csvfile}, timeout=10)
+    try:
+        for filename in os.listdir("data/time"):
+            with open("data/time/"+str(filename), "rb") as csvfile:
+                response = requests.post(url, files = {"file": csvfile}, timeout=10)
             if response.ok:
-                print("Upload completed successfully!")
-                print(response.text)
-            else:
-                print("Something went wrong!")
+                if filename != today+str(".csv"):
+                    #os.remove("data/time/"+str(filename))
+                    print("Et hop on remove "+ str(filename)+ " de la carte SD de la pi")
+    except: pass
+            
+def get_quote():
+    url = "http://192.168.1.20:5000/quote"
+    try:
+        response = requests.get(url)
+        if response.ok:
+            print("updated quote")
+            return response.text
+    except: pass
 
 last_time = time.time()
+quote = "Dream it, then do it"
 if __name__ == "__main__":
 
     while True:
@@ -200,11 +210,12 @@ if __name__ == "__main__":
 
         start_time = get_time()
         screen.idle()
+        screen.write(quote)
         rotor.wait_for_rotate()
         current_activity = selectionMenuActivities(activities, rotor, button, screen)
         last_activity = current_activity
         write_action(date, start_time, get_time(), last_activity)
-        print("written to the pi storage")
         if time.time() - last_time > 10:
             send_data()
+            quote = get_quote()
             last_time = time.time()
