@@ -172,15 +172,14 @@ def send_data():
     # if connexion internet stable
     url = "http://192.168.1.20:5000/upload"
     for filename in os.listdir("data/time"):
-        print(filename)
-        csvfile = {"file": open("/home/simon/Documents/Code/Projects/Time_Tracking/data/time/"+str(filename), "rb")}
-        print(csvfile)
-        reponse = requests.post(url, files = csvfile, timeout=10)
-        if response.ok:
-            print("Upload completed successfully!")
-            print(response.text)
-        else:
-            print("Something went wrong!")
+        with open("data/time"+str(filename), "rb") as csvfile:
+            print(csvfile)
+            reponse = requests.post(url, files = {"file": csvfile}, timeout=10)
+            if response.ok:
+                print("Upload completed successfully!")
+                print(response.text)
+            else:
+                print("Something went wrong!")
 
 last_time = time.time()
 if __name__ == "__main__":
