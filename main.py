@@ -172,8 +172,8 @@ def send_data():
     # if connexion internet stable
     url = "http://192.168.1.20:5000/upload"
     for filename in os.listdir("data/time"):
-        csvfile = open("data/time/"+str(filename), "rb")
-        reponse = requests.post(url, files = {"filefield": csvfile})
+        csvfile = {"file": open("data/time/"+str(filename), "rb")}
+        reponse = requests.post(url, files = csvfile)
         if response.ok:
             print("Upload completed successfully!")
             print(response.text)
