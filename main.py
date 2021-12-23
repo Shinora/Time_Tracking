@@ -143,7 +143,7 @@ def selectionMenuCategories(categories, rotor,  button, screen):
     while button.value != True:
         index = int(rotor.steps)
         selection = categories[index]
-        screen.write(categories[index].code)
+        screen.write(categories[index])
 
     return categories[index]
 
