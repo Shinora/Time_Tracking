@@ -49,7 +49,7 @@ Activity(name="Doing Nothing" , category="WASTE", code="NOTHING", duration=1, de
 Activity(name="Video Games and related" , category="WASTE", code="GAMES", duration=1, description="playing with no educational or social purpose", value=-1)]
 
 
-categories = category_list(activities)
+
 
 #--------------------------- HARDWARE SETUP -------------------------------------------
 
@@ -185,6 +185,10 @@ def get_quote():   # NOT WORKING, I MIGHT NEED TO USE BEAUTIFULSOUP
         return response.text
 
     except: pass
+
+
+categories = category_list(activities)
+
 
 last_time = time.time()
 if __name__ == "__main__":
