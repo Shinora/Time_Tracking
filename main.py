@@ -149,9 +149,9 @@ def selectionMenuCategories(categories, rotor,  button, screen):
 
 def selectionMenuActivities(category, activities, rotor, button, screen):
     rotor.close()
-    rotor = RotaryEncoder(a=21, b=20, max_steps=len(activities)-1, wrap=True)
     index = 0
     valid_activities = filter_categories(activities, category)
+    rotor = RotaryEncoder(a=21, b=20, max_steps=len(valid_activities)-1, wrap=True)
     while button.value != True:
         index = int(rotor.steps)
         selection = valid_activities[index]
