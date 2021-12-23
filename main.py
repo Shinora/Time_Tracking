@@ -48,6 +48,9 @@ Activity(name="Phone scrolling" , category="WASTE", code="PHONE", duration=1, de
 Activity(name="Doing Nothing" , category="WASTE", code="NOTHING", duration=1, description="beoing so lost and unproductive that i dont do anything", value=-1),
 Activity(name="Video Games and related" , category="WASTE", code="GAMES", duration=1, description="playing with no educational or social purpose", value=-1)]
 
+
+categories = category_list(activities)
+
 #--------------------------- HARDWARE SETUP -------------------------------------------
 
 
@@ -75,16 +78,6 @@ def read_csv(date):
         for row in csv_reader:
             print(row)
 
-def findInstanceQuestions(code, questions, activities):
-    for instance in questions:
-        if instance.code == code:
-            return instance
-    for instance in activities:
-        if instance.code == code:
-            return instance
-
-    return False
-
 def findInstanceQuestions(code, questions):
     for instance in questions:
         if instance.code == code:
@@ -98,7 +91,6 @@ def findInstanceActivities(code,activities):
             return instance
 
     return False
-
 
 def category_list(activities):
     categories = []
@@ -144,25 +136,25 @@ def saveQuestionsAnwsers(date, questions, anwsers):
     return None
 
 
-def selectionMenuCategories(categories, rotor, button, screen):
-    t0 = time.time()
-    while button.value != 1:
-        index = int(rotor.steps)
-        selection = categories[index]
-        
-        if time.time()- t0 > 30:
-            return selection
-
-    return selection
-
-def selectionMenuActivities(activities, rotor, button, screen):
+def selectionMenuCategories(categories, button, screen):
+    rotor = RotaryEncoder(a=21, b=20, max_steps=len(categories)-1, wrap=False)
     index = 0
     while button.value != True:
         index = int(rotor.steps)
-        selection = activities[index]
-        screen.write(activities[index].code)
+        selection = categories[index]
+        screen.write(categories[index].code)
 
-    return activities[index]
+    return categories[index]
+
+def selectionMenuActivities(category, activities, rotor, button, screen):
+    index = 0
+    valid_activities = filter_categories(activities, category)
+    while button.value != True:
+        index = int(rotor.steps)
+        selection = valid_activities[index]
+        screen.write(valid_activities[index].code)
+
+    return valid_activities[index]
 
 
 def send_data():
