@@ -137,7 +137,8 @@ def saveQuestionsAnwsers(date, questions, anwsers):
 
 
 def selectionMenuCategories(categories, rotor,  button, screen):
-    rotor.max_steps = len(categories) - 1
+    rotor.close()
+    rotor = RotaryEncoder(a=21, b=20, max_steps=len(categories)-1, wrap=False)
     index = 0
     while button.value != True:
         index = int(rotor.steps)
@@ -147,7 +148,8 @@ def selectionMenuCategories(categories, rotor,  button, screen):
     return categories[index]
 
 def selectionMenuActivities(category, activities, rotor, button, screen):
-    rotor.max_steps = len(activities) - 1
+    rotor.close()
+    rotor = RotaryEncoder(a=21, b=20, max_steps=len(activities)-1, wrap=True)
     index = 0
     valid_activities = filter_categories(activities, category)
     while button.value != True:
