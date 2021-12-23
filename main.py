@@ -205,7 +205,8 @@ if __name__ == "__main__":
         start_time = get_time()
         screen.idle()
         rotor.wait_for_rotate()
-        current_activity = selectionMenuActivities(activities, rotor, button, screen)
+        current_category = selectionMenuCategories(categories, button, screen)
+        current_activity = selectionMenuActivities(category=current_category, activities=activities, rotor=rotor, button=button, screen=screen)
         last_activity = current_activity
         write_action(date, start_time, get_time(), last_activity)
         if time.time() - last_time > 10:
