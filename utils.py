@@ -117,7 +117,7 @@ class Screen():
         self.disp.fill(0)
         self.image = Image.new('1', (self.width, int(self.height/2)))
         self.draw = ImageDraw.Draw(self.image)
-        self.draw.rectangle((0, height/2, self.width, self.height), outline=0, fill=0)
+        self.draw.rectangle((0, 0, self.width, int(self.height/2)), outline=0, fill=0)
 
 
     def idle(self):
