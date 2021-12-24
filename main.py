@@ -112,10 +112,12 @@ def questionAnwser(question, rotor, button, screen):
     screen.write_topline(question.question)
     choices = []
     valid = 0
+    
     for anwser in question.anwsers:
         choices.append(anwser[0])
-        
+
     index = 0
+    selection = choices[index]
     rotor = RotaryEncoder(a=21, b=20, max_steps=len(choices)-1, wrap=False)
 
     while button.value != True:
