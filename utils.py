@@ -115,7 +115,7 @@ class Screen():
     def clear_bottomline(self):
         self.x=0
         self.disp.fill(0)
-        self.image = Image.new('1', (self.width, self.height/2))
+        self.image = Image.new('1', (self.width, int(self.height/2)))
         self.draw = ImageDraw.Draw(self.image)
         self.draw.rectangle((0, height/2, self.width, self.height), outline=0, fill=0)
 
