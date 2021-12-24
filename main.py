@@ -112,7 +112,6 @@ def questionAnwser(question, rotor, button, screen):
     screen.write_topline(question.question)
     choices = []
     valid = 0
-    
     for anwser in question.anwsers:
         choices.append(anwser[0])
 
@@ -123,7 +122,10 @@ def questionAnwser(question, rotor, button, screen):
     while button.value != True:
         index = int(rotor.steps)
         selection = choices[index]
+        screen.clean()
+        screen.write_topline(question.question)
         screen.write_bottomline(choices[index])
+        
 
     return selection
 
