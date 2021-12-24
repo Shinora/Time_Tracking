@@ -114,6 +114,7 @@ def questionAnwser(question, rotor, button, screen):
     valid = 0
     for anwser in question.anwsers:
         choices.append(anwser[0])
+        
     index = 0
     rotor = RotaryEncoder(a=21, b=20, max_steps=len(choices)-1, wrap=False)
 

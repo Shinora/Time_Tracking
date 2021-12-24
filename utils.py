@@ -95,15 +95,14 @@ class Screen():
         self.disp.show()
 
     def write_topline(self, text):
-        self.draw.text((self.x, self.top+0), text, font=self.font, fill=255, align='center')
+        self.draw.text((self.x, self.top+0), text, font=self.tinyfont, fill=255, align='center')
         self.disp.image(self.image)
         self.disp.show()
 
     def write_bottomline(self, text):
-        self.draw.text((self.x, self.top/2), text, font=self.font, fill=255, align='center')
+        self.draw.text((self.x, (self.height)/2), text, font=self.font, fill=255, align='center')
         self.disp.image(self.image)
         self.disp.show()
-
 
     def clear(self):
         self.x=0
