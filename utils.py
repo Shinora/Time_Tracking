@@ -104,6 +104,14 @@ class Screen():
         self.disp.image(self.image)
         self.disp.show()
 
+    def write_twolines(self, line1, line2):
+        self.clear()
+        self.draw.text((self.x, self.top+0), line1, font=self.tinyfont, fill=255, align='center')
+        self.draw.text((self.x, (self.height)/2), line2, font=self.tinyfont, fill=255, align='center')
+        self.disp.image(self.image)
+        self.disp.show()
+
+
     def clear(self):
         self.x=0
         self.disp.fill(0)

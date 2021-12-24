@@ -122,9 +122,7 @@ def questionAnwser(question, rotor, button, screen):
     while button.value != True:
         index = int(rotor.steps)
         selection = choices[index]
-        screen.clear()
-        screen.write_topline(question.question)
-        screen.write_bottomline(choices[index])
+        screen.write_twolines(qestion.question, choices[index])
         
 
     return selection
