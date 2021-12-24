@@ -106,7 +106,7 @@ def filter_categories(activities, filter):
             filtered.append(activity)
     return filtered
 
-def questionAnwser(question):
+def questionAnwser(question, rotor, button, screen):
     rotor.close()
     screen.clear()
     screen.write_topline(question.question)
@@ -127,7 +127,7 @@ def questionAnwser(question):
 def dailyQuestions(questions, rotor, button, screen):
     anwsers = []
     for question in questions:
-        anwsers.append(questionAnwser(question))
+        anwsers.append(questionAnwser(question, rotor, button, screen))
     return anwsers
     
 def saveQuestionsAnwsers(date, questions, anwsers): 
