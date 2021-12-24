@@ -107,19 +107,22 @@ def filter_categories(activities, filter):
     return filtered
 
 def questionAnwser(question):
-    print(question.question)
-    screen.write(question.question)
+    rotor.close()
+    screen.clear()
+    screen.write_topline(question.question)
     choices = []
     valid = 0
     for anwser in question.anwsers:
-        print(anwser[0])  # LCD
         choices.append(anwser[0])
-    while valid != 1:
-        selection = str(input(" Entrez votre choix : ")).lower()   # Rotary encoder
-        print(selection)
-        if selection in choices:
-            valid = 1
-    return anwser
+    index = 0
+    rotor = RotaryEncoder(a=21, b=20, max_steps=len(choices)-1, wrap=False)
+
+    while button.value != True:
+        index = int(rotor.steps)
+        selection = choices[index]
+        screen.write_bottomline(choices[index])
+
+    return selection
 
 def dailyQuestions(questions, rotor, button, screen):
     anwsers = []

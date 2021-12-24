@@ -82,7 +82,7 @@ class Screen():
     # Load default font.
         self.font = ImageFont.load_default()
         self.specialfont = ImageFont.truetype("Retron2000.ttf", 15)
-        self.tinyfont = ImageFont.truetype("Retron2000.ttf", 3)
+        self.tinyfont = ImageFont.truetype("Retron2000.ttf", 8)
     # Alternatively load a TTF font.  Make sure the .ttf font file is in the
     # same directory as the python script!
     # Some other nice fonts to try: http://www.dafont.com/bitmap.php
@@ -90,9 +90,20 @@ class Screen():
 
     def write(self, text):
         self.clear()
-        self.draw.text((self.x, self.top+0), text, font=self.specialfont, fill=255)
+        self.draw.text((self.x, self.top+0), text, font=self.specialfont, fill=255, align='center')
         self.disp.image(self.image)
         self.disp.show()
+
+    def write_topline(self, text):
+        self.draw.text((self.x, self.top+0), text, font=self.font, fill=255, align='center')
+        self.disp.image(self.image)
+        self.disp.show()
+
+    def write_bottomline(self, text):
+        self.draw.text((self.x, self.top/2), text, font=self.font, fill=255, align='center')
+        self.disp.image(self.image)
+        self.disp.show()
+
 
     def clear(self):
         self.x=0
