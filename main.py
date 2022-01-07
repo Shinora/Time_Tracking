@@ -220,5 +220,6 @@ if __name__ == "__main__":
         last_activity = current_activity
         write_action(date, start_time, get_time(), last_activity)
         if time.time() - last_time > 10:
+
             send_data()
             last_time = time.time()
