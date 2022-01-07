@@ -106,25 +106,31 @@ def filter_categories(activities, filter):
             filtered.append(activity)
     return filtered
 
-def questionAnwser(question):
-    print(question.question)
-    screen.write(question.question)
+def questionAnwser(question, rotor, button, screen):
+    rotor.close()
+    screen.clear()
+    screen.write_topline(question.question)
     choices = []
     valid = 0
     for anwser in question.anwsers:
-        print(anwser[0])  # LCD
         choices.append(anwser[0])
-    while valid != 1:
-        selection = str(input(" Entrez votre choix : ")).lower()   # Rotary encoder
-        print(selection)
-        if selection in choices:
-            valid = 1
-    return anwser
+
+    index = 0
+    selection = choices[index]
+    rotor = RotaryEncoder(a=21, b=20, max_steps=len(choices)-1, wrap=False)
+
+    while button.value != True:
+        index = int(rotor.steps)
+        selection = choices[index]
+        screen.write_twolines(question.question, choices[index])
+        
+
+    return selection
 
 def dailyQuestions(questions, rotor, button, screen):
     anwsers = []
     for question in questions:
-        anwsers.append(questionAnwser(question))
+        anwsers.append(questionAnwser(question, rotor, button, screen))
     return anwsers
     
 def saveQuestionsAnwsers(date, questions, anwsers): 
@@ -175,7 +181,8 @@ def send_data():
                     if filename != today+str(".csv"):
                         #os.remove("data/time/"+str(filename))
                         print("Et hop on remove "+ str(filename)+ " de la carte SD de la pi")
-        except Exception() as ex: 
+                
+        except Exception as ex: 
             print(ex)
             
 def get_quote():   # NOT WORKING, I MIGHT NEED TO USE BEAUTIFULSOUP

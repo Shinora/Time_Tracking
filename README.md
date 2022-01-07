@@ -16,6 +16,9 @@ If the device hasn't been manipulated and clicked today, the program will enter 
 ## TODO
 
 
+# OPTIONNAL FEATURES
+
+
 - ### MAIN FEATURES
     - Add full support for question asking and anwsering from the device
     - Clean the code and the data sending part to avoid potential issues
