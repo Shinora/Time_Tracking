@@ -163,22 +163,23 @@ def selectionMenuActivities(category, activities, rotor, button, screen):
 def send_data():
     # if connexion internet stable
     today = get_date()
-    url = "http://192.168.1.49:5000/upload"
+    url = "http://192.168.1.72:5000/upload"
     
     for filename in os.listdir("data/time"):
         try:
             with open("data/time/"+str(filename), "rb") as csvfile:
-                response = requests.post(url, files = {"file": csvfile}, timeout=10)
+                print("sending started [ ... ]")
+                response = requests.post(url, files = {"file": csvfile}, timeout=5)
                 print("sent file")
                 if response.ok:
                     if filename != today+str(".csv"):
                         #os.remove("data/time/"+str(filename))
                         print("Et hop on remove "+ str(filename)+ " de la carte SD de la pi")
-        except: 
-            print("error when sending file")
+        except Exception() as ex: 
+            print(ex)
             
 def get_quote():   # NOT WORKING, I MIGHT NEED TO USE BEAUTIFULSOUP
-    url = "http://localhost:5000/quote"  
+    url = "http://192.168.1.72:5000/quote"  
     try:
         response = requests.get(url)
         print(response)
