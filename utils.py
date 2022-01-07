@@ -8,11 +8,11 @@ from PIL import Image, ImageDraw, ImageFont
 import adafruit_ssd1306
 
 class Activity:
-    name = ""
-    category = ""
-    code = ""
+    name = None
+    category = None
+    code = None
     duration = 0.5
-    description = ""
+    description = None
     value = 0
 
     def __init__(self, name, category, code, duration, description, value):
@@ -81,8 +81,10 @@ class Screen():
 
     # Load default font.
         self.font = ImageFont.load_default()
+
         self.specialfont = ImageFont.truetype("assets/Retron2000.ttf", 15)
         self.tinyfont = ImageFont.truetype("assets/Retron2000.ttf", 8)
+
     # Alternatively load a TTF font.  Make sure the .ttf font file is in the
     # same directory as the python script!
     # Some other nice fonts to try: http://www.dafont.com/bitmap.php

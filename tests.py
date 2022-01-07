@@ -1,10 +1,9 @@
-''' The main goal of the script is to unsure all the hardware parts are properly working ... ''' 
+''' The main goal of the script is to ensure all the hardware parts are properly working ... ''' 
 from gpiozero import RotaryEncoder, Button
 from gpiozero.tools import scaled_half
 import os
 import sys
 import time
-import RPi.GPIO as GPIO
 from board import SCL, SDA
 import busio
 from PIL import Image, ImageDraw, ImageFont
@@ -77,8 +76,8 @@ def test_screen():
 def test_battery():
     pass
 
-
-test_pi()
-test_screen()
-test_encoder()
-test_battery()
+if __name__ == '__main__':
+    test_pi()
+    test_screen()
+    test_encoder()
+    test_battery()

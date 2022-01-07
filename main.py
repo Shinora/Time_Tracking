@@ -174,12 +174,14 @@ def send_data():
     for filename in os.listdir("data/time"):
         try:
             with open("data/time/"+str(filename), "rb") as csvfile:
+                print("sending started [ ... ]")
                 response = requests.post(url, files = {"file": csvfile}, timeout=5)
                 print("sent file")
                 if response.ok:
                     if filename != today+str(".csv"):
                         #os.remove("data/time/"+str(filename))
                         print("Et hop on remove "+ str(filename)+ " de la carte SD de la pi")
+                
         except Exception as ex: 
             print(ex)
             
@@ -225,5 +227,6 @@ if __name__ == "__main__":
         last_activity = current_activity
         write_action(date, start_time, get_time(), last_activity)
         if time.time() - last_time > 10:
+
             send_data()
             last_time = time.time()
