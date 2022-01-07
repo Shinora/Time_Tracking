@@ -8,11 +8,11 @@ from PIL import Image, ImageDraw, ImageFont
 import adafruit_ssd1306
 
 class Activity:
-    name = ""
-    category = ""
-    code = ""
+    name = None
+    category = None
+    code = None
     duration = 0.5
-    description = ""
+    description = None
     value = 0
 
     def __init__(self, name, category, code, duration, description, value):

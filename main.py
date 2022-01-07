@@ -211,6 +211,8 @@ if __name__ == "__main__":
 
         start_time = get_time()
         screen.idle()
+        rotor.close()
+        rotor = RotaryEncoder(a=21, b=20, max_steps=len(activities)-1, wrap=True)
         rotor.wait_for_rotate()
         current_category = selectionMenuCategories(categories, rotor, button, screen)
         current_activity = selectionMenuActivities(category=current_category, activities=activities, rotor=rotor, button=button, screen=screen)
